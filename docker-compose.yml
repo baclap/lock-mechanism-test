@@ -1,0 +1,22 @@
+version: '3'
+services:
+  redis:
+    image: redis
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+  mongo_test:
+    image: node
+    command: node /usr/app/test-mongo
+    volumes:
+      - ./:/usr/app
+    links:
+      - mongo
+  redis_test:
+    image: node
+    command: node /usr/app/test-redis
+    volumes:
+      - ./:/usr/app
+    links:
+      - redis
